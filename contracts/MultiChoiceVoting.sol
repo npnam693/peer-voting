@@ -10,7 +10,7 @@ contract MultiChoiceVoting{
     /**
      * @dev The number of proposals in contract.
      */
-    uint256 proposalsCount;
+    uint256 public proposalsCount;
 
 
     /**

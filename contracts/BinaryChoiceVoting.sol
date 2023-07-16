@@ -16,11 +16,11 @@ contract BinaryChoiceVoting{
     /**
      * @dev The number of proposals in contract.
      */
-    uint256 proposalsCount;
+    uint256 public proposalsCount;
 
 
     /**
-     * @dev Constructor of YesNoVoting contract with the number of proposals set to zero.
+     * @dev Constructor of BinaryChoiceVoting contract with the number of proposals set to zero.
      */
     constructor() {
         proposalsCount = 0;
