@@ -1,27 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
+/* 
+  Note: The styles for this gradient grid background is heavily inspired by the creator of this amazing site (https://dub.sh) – all credits go to them! 
+*/
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+
+
+.gradient {
+  position: fixed;
+  top: 0;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+  background-image: linear-gradient(to left top, #636374, #606075, #5d5d75, #5a5a76, #575776, #565676, #555576, #545476, #555575, #555574, #565672, #565671);
+}
+.app {
+  width: 100vw;
+  min-height: 100vh;
+  padding: 20px 16%;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+}
+
+@media screen and (max-width: 640px) {
+  .app {
+    padding: 10px 5%;
+  }
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #ffedf7;
+  color: black;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.proposal {
+  background-color: rgba(255,255,255,0.22);
+  padding: 20px;
+  border-radius: 5px;
+  border: 2px solid white;
+}
+
+.prompt_layout {
+  @apply  space-y-6 py-8 sm:columns-1 sm:gap-6 xl:columns-2;
 }
