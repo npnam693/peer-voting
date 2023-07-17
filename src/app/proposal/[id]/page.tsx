@@ -41,6 +41,7 @@ const Proposal = () => {
       })}
       isPage={true}
       endTime={Number(data.endTime)}
+      owner={data.owner}
     />
   )
 }

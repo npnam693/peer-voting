@@ -4,7 +4,9 @@ import { useAppContext } from '@/context/appContext'
 import { multiContract } from '@/services/blockchainService'
 import { binaryContract } from '@/services/blockchainService'
 import shareIcon from '../../assets/images/share.svg'
+import linkIcon from '../../assets/images/link.svg'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation' 
 
 export interface IProposalModalProps {
     id: string,
@@ -35,7 +37,7 @@ export const ProposalModal = ({id, title, desc, choiceAmount, createdAt, isPage,
         Promise.all(Array(choiceAmount).fill(0).map((value: number, index: number) => multiContract(web3).methods.getChoiceProposal(id, index).call()))
         .then((res) => setChoices(data => [...data, ...res]))
     }
-
+    const router = useRouter()
 
     console.log('vcl', endTime)
     const fetchYourChoices = async () => {
@@ -181,10 +183,17 @@ export const ProposalModal = ({id, title, desc, choiceAmount, createdAt, isPage,
                             <span>ID: {choiceAmount ? '#MC' : '#BC'}0{String(id)} - </span>
                             <span className={choiceAmount ? 'text-violet-500' : 'text-sky-500'}>{ !choiceAmount ? ' Binary Choice' : 'Multiple Choice'}</span>
                             <span> - {proposalDate.slice(0, proposalDate.length - 25)}</span>
-                            <span className='flex cursor-pointer' onClick={() => {navigator.clipboard.writeText(`localhost:3000/proposal/${choiceAmount ? 'mc' : 'bc'}0${String(id)}`)}}>
-                                <span className='text-sm font-medium mr-1'>Share</span>
-                                <Image src={shareIcon} alt='Logo' width={16} height={16}/>
-                            </span>
+                            <div className='flex flex-row'>
+                                <span className='flex cursor-pointer' onClick={() => {navigator.clipboard.writeText(`localhost:3000/proposal/${choiceAmount ? 'mc' : 'bc'}0${String(id)}`)}}>
+                                    <span className='text-sm font-medium mr-1'>Copy link</span>
+                                    <Image src={shareIcon} alt='Logo' width={13} height={13}/>
+                                </span>
+                                
+                                <span className='flex cursor-pointer ml-4' onClick={() => {router.push(`proposal/${choiceAmount ? 'mc' : 'bc'}0${String(id)}`)}}>
+                                    <span className='text-sm font-medium mr-1'>Page</span>
+                                    <Image src={linkIcon} alt='Logo' width={16} height={16}/>
+                                </span>
+                            </div>
                         </p>
                     </div>
                     <div className='ml-10 flex items-center '>
