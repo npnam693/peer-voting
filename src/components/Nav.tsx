@@ -35,7 +35,7 @@ const Nav = () => {
         } catch (error : any) {
           // This error code indicates that the chain has not been added to MetaMask
           // if it is not, then install it into the user MetaMask
-            alert("Website only support BaoBab Testnet. Please add network BaoBab Testnet to use this website!")
+            // alert("Website only support BaoBab Testnet. Please add network BaoBab Testnet to use this website!")
           }
       }
       else {
