@@ -19,13 +19,30 @@ const Nav = () => {
   }
 
   useEffect(() => {
-    if (window.ethereum) {
-      const web3 = new Web3(window.ethereum);
-      setWeb3(web3);
+    const fetchWeb3 = async () => {
+      if (window.ethereum) {
+        const web3 = new Web3(window.ethereum);
+        setWeb3(web3);
+        const network = Number(await web3.eth.net.getId())
+        if (network !== 1001)
+        try {
+          // check if the chain to connect to is installed
+          await window.ethereum.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId: '0x3e9' }], // chainId must be in hexadecimal numbers
+          });
+          setWeb3(new Web3(window.ethereum));
+        } catch (error : any) {
+          // This error code indicates that the chain has not been added to MetaMask
+          // if it is not, then install it into the user MetaMask
+            alert("Website only support BaoBab Testnet. Please add network BaoBab Testnet to use this website!")
+          }
+      }
+      else {
+        alert("Please install MetaMask to use this website!");
+      }
     }
-    else {
-      alert("Please install MetaMask to use this website!");
-    }
+    fetchWeb3()
   }, []);
 
   return (
