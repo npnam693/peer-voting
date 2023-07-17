@@ -9,7 +9,7 @@ const Proposal = () => {
   const {address, web3, login} = useAppContext();
   
   const pathName = usePathname()
-  let id = String(pathName).slice(10)
+  let id = String(pathName).slice(6)
   const [data, setData] = useState<any>(null);
   console.log(id.slice(0,2), id.slice(2))
   console.log(data)

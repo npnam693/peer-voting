@@ -20,7 +20,6 @@ const Nav = () => {
 
   useEffect(() => {
     if (window.ethereum) {
-      console.log('vcl')
       const web3 = new Web3(window.ethereum);
       setWeb3(web3);
     }
@@ -39,7 +38,7 @@ const Nav = () => {
         <div className='flex items-end'>
           <button className='underline decoration-sky-500 mr-4 text-lg font-semibold hover:text-sky-500'
             onClick={() => router.push('/create')}
-          >Create Proposal</button>
+          >Create a Poll</button>
           <button className='btn' onClick={connectWallet}>
             {
               address === '' ? 'Connect Wallet' : address.slice(0,4) + '...' + address.slice(-5)

@@ -184,12 +184,12 @@ export const ProposalModal = ({id, title, desc, choiceAmount, createdAt, isPage,
                             <span className={choiceAmount ? 'text-violet-500' : 'text-sky-500'}>{ !choiceAmount ? ' Binary Choice' : 'Multiple Choice'}</span>
                             <span> - {proposalDate.slice(0, proposalDate.length - 25)}</span>
                             <div className='flex flex-row'>
-                                <span className='flex cursor-pointer' onClick={() => {navigator.clipboard.writeText(`localhost:3000/proposal/${choiceAmount ? 'mc' : 'bc'}0${String(id)}`)}}>
+                                <span className='flex cursor-pointer' onClick={() => {navigator.clipboard.writeText(`https://peer-voting.vercel.app/poll/${choiceAmount ? 'mc' : 'bc'}0${String(id)}`)}}>
                                     <span className='text-sm font-medium mr-1'>Copy link</span>
                                     <Image src={shareIcon} alt='Logo' width={13} height={13}/>
                                 </span>
                                 
-                                <span className='flex cursor-pointer ml-4' onClick={() => {router.push(`proposal/${choiceAmount ? 'mc' : 'bc'}0${String(id)}`)}}>
+                                <span className='flex cursor-pointer ml-4' onClick={() => {router.push(`poll/${choiceAmount ? 'mc' : 'bc'}0${String(id)}`)}}>
                                     <span className='text-sm font-medium mr-1'>Page</span>
                                     <Image src={linkIcon} alt='Logo' width={16} height={16}/>
                                 </span>

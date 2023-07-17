@@ -70,7 +70,7 @@ const Create = () => {
 
   return (
     <div className="mt-10 flex items-center flex-col w-full">
-      <p className="text-3xl font-bold mb-4">Create a new Proposal!</p>
+      <p className="text-3xl font-bold mb-4">Create a new Poll!</p>
 
       <div>
         <button
