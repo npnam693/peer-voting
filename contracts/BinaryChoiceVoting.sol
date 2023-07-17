@@ -58,13 +58,14 @@ contract BinaryChoiceVoting{
     /**
      * @dev Mapping to check whether an address has voted for a proposal - [address][proposalId].
      */
-    mapping (address => mapping(uint256 => bool)) private isVoted;
+    mapping (address => mapping(uint256 => bool)) public isVoted;
 
 
     /**
      * @dev Mapping to check whether an address has voted for a proposal and the result of vote - [address][proposalId].
      */
     mapping (address => mapping(uint256 => bool)) private resultVoted;
+
 
 
     /**
@@ -99,7 +100,7 @@ contract BinaryChoiceVoting{
     function voteProposal(uint256 id, bool vote) public {
         require(id <= proposalsCount, "Proposal's not exist.");
         require (!isVoted[msg.sender][id], "You have vote for proposal yet.");
-        require (proposals[id].isEnd, "Voting time has expired.");
+        require (!proposals[id].isEnd, "Voting time has expired.");
 
         isVoted[msg.sender][id] = true;
         if (vote) {

@@ -10,40 +10,39 @@ import { ProposalModal } from "@/components/ProposalModal";
 import { IProposalModalProps } from "@/components/ProposalModal";
 
 export default function Home() {
-  const {web3, address, setWeb3} = useAppContext();
-  console.log(address)
+  const {web3} = useAppContext();
   const [data, setData] = useState<any[]>([]);
+  
   const [proposalOpened, setProposalOpened] = useState<any>({
     id: '',
     title: '',
     desc: '',
   });
 
-  const fetchProposal = async (web3?: any) => {
+  const fetchProposal = async () => {
     const binaryProposalCount = Number(await binaryContract(web3).methods.proposalsCount().call());
-    Promise.all(Array(binaryProposalCount).fill(0).map((value: number, index: number) => binaryContract(web3).methods.proposals(index).call()))
-    .then((res) => setData(data => [...data, ...res]))
+    await Promise.all(Array(binaryProposalCount).fill(0).map((value: number, index: number) => binaryContract(web3).methods.proposals(index).call()))
+    .then((res) => {
+      setData(data => [...data, ...res].sort((a, b) => Number(b.startTime) - Number(a.startTime)))
+    })
     .catch((err) => console.log(err));
-    console.log('number', binaryProposalCount)
-    const multiProposalCount = await multiContract(web3)
-      .methods.proposalsCount().call()
-    Promise.all(Array(multiProposalCount).fill(0).map((value: number, index: number) => multiContract(web3).methods.proposals(index).call()))
-        .then((res) => setData(data => [...data, ...res]))
+    
+    const multiProposalCount = Number(await multiContract(web3).methods.proposalsCount().call())
+    await Promise.all(Array(multiProposalCount).fill(0).map((value: number, index: number) => multiContract(web3).methods.proposals(index).call()))
+    .then((res) => {
+      setData(data => [...data, ...res].sort((a, b) => Number(b.startTime) - Number(a.startTime)))
+    })
+    .catch((err : any) => console.log(err))
+      
+    console.log('ccc', data.sort((a, b) => Number(b.startTime) - Number(a.startTime)))
   }
 
   useEffect(() => {
-    if (window.ethereum) {
-      const web3 = new Web3(window.ethereum || "http://localhost:8545");
-      setWeb3(web3);
-      fetchProposal(web3)
-    }
-    else {
-      alert("Please install MetaMask to use this website!");
-      return
-    }
-  }, []);
-
+    web3 !== null &&
+    fetchProposal()
+  }, [web3])
   console.log(data)
+
 
   return (
     // <main className="flex flex-row items-center justify-between ">
@@ -56,7 +55,9 @@ export default function Home() {
               title: value.title,
               desc: value.desc,
               choiceAmount: Number(value.choiceAmount),
-              createdAt: Number(value.startTime)
+              createdAt: Number(value.startTime),
+              endTime: Number(value.endTime),
+              owner: value.owner
             })}>
               <ProposalCard title={value.title} 
                 desc={value.desc} 
@@ -76,6 +77,8 @@ export default function Home() {
             title: '',
             desc: ''
           })}
+          endTime={proposalOpened.endTime}
+          owner={proposalOpened.owner}
         />
       }
     </>

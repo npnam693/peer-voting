@@ -4,7 +4,7 @@ import { createContext, useContext, useState } from "react";
 type appContextType = {
     web3: any;
     address: string;
-    login: (address: string , web3: any) => void;
+    login: (address: string) => void;
     setWeb3: (web3: any) => void;
 };
 
@@ -26,9 +26,8 @@ export function AuthProvider({children}: Props) {
     const [address, setAddress] = useState<string>(appContextDefault.address);
     const [web3, setWeb3] = useState<any>(appContextDefault.web3)
 
-    const login = (address: string, web3: any) => {
+    const login = (address: string) => {
         setAddress(address);
-        setWeb3(web3);
     };
 
 

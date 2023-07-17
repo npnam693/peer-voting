@@ -1,9 +1,9 @@
 import MultiChoiceVoting from '../../artifacts/contracts/MultiChoiceVoting.sol/MultiChoiceVoting.json';
 import BinaryChoiceVoting from '../../artifacts/contracts/BinaryChoiceVoting.sol/BinaryChoiceVoting.json';
 
-export const BINARY_CONTRACT_ADDRESS = "0x5394D00c1C8B9d9a8e32562Fd497e6de980811a2";
+export const BINARY_CONTRACT_ADDRESS = "0x11D96e6C93e4f8e7E072D0303C78997EBA61F85a";
 
-export const MULTI_CONTRACT_ADDRESS = "0xEF4FEb676367Ee0D1DED5A6cb9bc180f40200983";
+export const MULTI_CONTRACT_ADDRESS = "0x3fc7379C9a8682620c4eb0F87b454bc746B0E4c5";
 
 export const BINARY_CONTRACT_ABI = BinaryChoiceVoting.abi
 
